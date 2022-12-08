@@ -17,9 +17,18 @@ it('should be able to create a short url', function () {
 
     assertDatabaseCount('urls', 1);
 });
-   
 
-// it should be able to create a custom code for short url
+it('should be able to create a custom code for short url', function () {
+    livewire(Shortner::class)
+        ->set('url', "https://laravel.com/docs/9.x/validation#main-content")
+        ->set('customCode', 'my-custom-code')
+        ->call('create')
+        ->assertHasNoErrors()
+        ->assertSee('my-custom-code');
+
+    assertDatabaseCount('urls', 1);
+});
+    
 // it should not be able to use special chars in the code
 // test code should be unique in database
 // test url should be required

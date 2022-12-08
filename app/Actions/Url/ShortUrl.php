@@ -7,16 +7,16 @@ use Illuminate\Support\Str;
 
 class ShortUrl
 {
-    public static function run(string $url): string
+    public static function run(string $url, string $code = null): string
     {
         $code = Url::query()
             ->create([
                 'user_id' => auth()->user()->id ?? null,
-                'code' => self::handleCode(),
+                'code' => self::handleCode($code),
                 'target_url' => $url,
             ])->code;
 
-        return config('app.url') . $code;
+        return config('app.url') . "/" . $code;
     }
 
     private static function handleCode(string $code = null): string
