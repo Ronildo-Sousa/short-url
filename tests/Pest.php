@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 /*
 |--------------------------------------------------------------------------
 | Test Case
@@ -11,8 +13,7 @@
 |
 */
 
-uses(Tests\TestCase::class)->in('Feature');
-
+uses(Tests\TestCase::class, DatabaseTransactions::class)->in('Feature');
 /*
 |--------------------------------------------------------------------------
 | Expectations
