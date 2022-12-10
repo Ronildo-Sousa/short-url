@@ -10,10 +10,17 @@ class Shortner extends Component
 {
     public string $url = "";
     public string $shortUrl = "";
-    public ?string $customCode = null;
+    public ?string $customCode = "";
+
+    protected $rules = [
+        'url' => ['required'],
+        'customCode' => ['alpha_dash', 'unique:urls,code'],
+    ];
 
     public function create(): void
     {
+        $this->validate();
+
         $this->shortUrl = ShortUrl::run($this->url, $this->customCode);
     }
 

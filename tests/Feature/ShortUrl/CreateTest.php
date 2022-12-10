@@ -28,8 +28,31 @@ it('should be able to create a custom code for short url', function () {
 
     assertDatabaseCount('urls', 1);
 });
-    
-// it should not be able to use special chars in the code
-// test code should be unique in database
+
+it('should not be able to use special chars in the custom code', function () {
+    livewire(Shortner::class)
+        ->set('url', "https://laravel.com/docs/9.x/validation#main-content")
+        ->set('customCode', '$wha#_te<>**😊v!#r@')
+        ->call('create')
+        ->assertHasErrors(["customCode"])
+        ->assertSee(trans('validation.alpha_dash', ['attribute' => 'custom code']));
+
+    assertDatabaseCount('urls', 0);
+});
+
+test('code should be unique in database', function () {
+    $url = Url::factory()->create(['code' => 'some-code']);
+
+    livewire(Shortner::class)
+        ->set('url', "https://laravel.com/docs/9.x/validation#main-content")
+        ->set('customCode', $url->code)
+        ->call('create')
+        ->assertHasErrors(["customCode"])
+        ->assertSee(trans('validation.unique', ['attribute' => 'custom code']));
+
+    assertDatabaseCount('urls', 1);
+});
+
+
 // test url should be required
 // test url should be a valid
