@@ -19,6 +19,8 @@ class Shortner extends Component
 
     public function create(): void
     {
+        $this->shortUrl = "";
+
         $this->validate();
 
         $this->shortUrl = ShortUrl::run($this->url, $this->customCode);
