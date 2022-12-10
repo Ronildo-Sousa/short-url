@@ -2,7 +2,6 @@
 
 use App\Http\Livewire\Shortner;
 use App\Models\Url;
-use App\Models\User;
 
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Livewire\livewire;
@@ -53,6 +52,22 @@ test('code should be unique in database', function () {
     assertDatabaseCount('urls', 1);
 });
 
+test('url should be a valid', function () {
+    livewire(Shortner::class)
+        ->set('url', "some-invalid-url")
+        ->call('create')
+        ->assertHasErrors(["url"])
+        ->assertSee(trans('validation.url', ['attribute' => 'url']));
 
-// test url should be required
-// test url should be a valid
+    assertDatabaseCount('urls', 0);
+});
+
+test('url should be required', function () {
+    livewire(Shortner::class)
+        ->set('url', "")
+        ->call('create')
+        ->assertHasErrors(["url"])
+        ->assertSee(trans('validation.required', ['attribute' => 'url']));
+
+    assertDatabaseCount('urls', 0);
+});

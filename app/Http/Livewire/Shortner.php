@@ -13,7 +13,7 @@ class Shortner extends Component
     public ?string $customCode = "";
 
     protected $rules = [
-        'url' => ['required'],
+        'url' => ['required', 'url'],
         'customCode' => ['alpha_dash', 'unique:urls,code'],
     ];
 
