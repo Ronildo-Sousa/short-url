@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccessUrlController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Shortner;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', Shortner::class);
+Route::get('/{code}', AccessUrlController::class)->name('accessUrl');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
