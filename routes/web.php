@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccessUrlController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\Shortner;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +21,7 @@ Route::get('/', Shortner::class);
 Route::get('/{code}', AccessUrlController::class)->name('accessUrl');
 
 Route::prefix('user/')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

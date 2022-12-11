@@ -1,0 +1,15 @@
+<div class="flex items-center justify-between p-3 mb-4 bg-gray-700 rounded hover:bg-gray-600">
+    <a href="{{ config('app.url') . '/' . $url->code }}" target="_blank" class="hover:text-blue-500">
+        {{ config('app.url') . '/' . $url->code }}
+    </a>
+
+    <a href="{{ $url->target_url }}" class="hover:text-blue-500">
+        {{ $this->formatedURL($url->target_url) }}
+    </a>
+
+    <p>{{ $this->getNumViews() }}</p>
+
+    <x-danger-button wire:click='deleteURL'>
+        d
+    </x-danger-button>
+</div>
