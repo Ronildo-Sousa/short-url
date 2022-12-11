@@ -10,7 +10,7 @@ class Dashboard extends Component
 {
     protected $listeners = [
         'deleted-url' => '$refresh',
-        'new-view' => '$refresh',
+        'refresh-page' => '$refresh',
     ];
 
     public ?Collection $urls = null;
