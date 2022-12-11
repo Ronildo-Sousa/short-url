@@ -9,7 +9,7 @@ use Livewire\Component;
 class Shortner extends Component
 {
     public string $url = "";
-    public string $shortUrl = "";
+    public string $shortUrl = "whatever";
     public ?string $customCode = "";
 
     protected $rules = [
