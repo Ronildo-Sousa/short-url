@@ -9,7 +9,7 @@
 
     <p>{{ $this->getNumViews() }}</p>
 
-    <x-danger-button wire:click='deleteURL'>
+    <x-buttons.danger-button wire:click='deleteURL'>
         <x-icons.trash class="w-5 h-5" />
-    </x-danger-button>
+    </x-buttons.danger-button>
 </div>

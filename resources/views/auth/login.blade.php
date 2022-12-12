@@ -14,20 +14,20 @@
 
             <!-- Email Address -->
             <div>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
+                <x-inputs.input-label for="email" :value="__('Email')" />
+                <x-inputs.text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email')"
                     :placeholder="'your email here...'" required autofocus />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <x-inputs.input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-inputs.input-label for="password" :value="__('Password')" />
 
-                <x-text-input id="password" class="block w-full mt-1" type="password" name="password" :placeholder="'your password here...'"
+                <x-inputs.text-input id="password" class="block w-full mt-1" type="password" name="password" :placeholder="'your password here...'"
                     required autocomplete="current-password" />
 
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-inputs.input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
 
             <div class="flex items-center justify-end mt-4">
@@ -38,9 +38,9 @@
                     </a>
                 @endif
 
-                <x-primary-button class="ml-3">
+                <x-buttons.primary-button class="ml-3">
                     {{ __('Log in') }}
-                </x-primary-button>
+                </x-buttons.primary-button>
             </div>
         </form>
     </x-auth-card>
