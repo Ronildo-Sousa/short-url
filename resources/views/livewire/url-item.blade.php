@@ -1,4 +1,4 @@
-<div x-data="{ open: true }" class="flex flex-col mb-5 text-green-500 bg-gray-700 rounded hover:bg-gray-600">
+<div x-data="{ open: false }" class="flex flex-col mb-5 text-green-500 bg-gray-700 rounded hover:bg-gray-600">
     <div class="flex items-center justify-between p-3 ">
         <div>
             <span class="font-semibold text-white">Short URL: </span>
@@ -13,7 +13,7 @@
             </a>
         </div>
         <p>
-            <span class="font-semibold text-white">Total views: </span>{{ $this->getNumViews() }}
+            <span class="font-semibold text-white">Total views: </span>{{ $url->totalViews() }}
         </p>
 
         <div class="flex">
@@ -30,15 +30,19 @@
     <div x-show="open" class="flex justify-around p-2">
         <p>
             <span class="font-semibold text-white">{{ __('Last view: ') }} </span>
-            20/08/2002 13:80
+            {{ $this->getLatestView() ?? __('No views') }}
         </p>
         <p>
             <span class="font-semibold text-white">{{ __("Today's views: ") }} </span>
-            20
+            {{ $url->todayViews() }}
         </p>
         <p>
             <span class="font-semibold text-white">{{ __("This week's views: ") }} </span>
-            20
+            {{ $url->weekViews() }}
+        </p>
+        <p>
+            <span class="font-semibold text-white">{{ __("This month's views: ") }} </span>
+            {{ $url->monthViews() }}
         </p>
     </div>
 </div>
