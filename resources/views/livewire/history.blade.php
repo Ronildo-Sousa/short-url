@@ -1,3 +1,3 @@
 <div>
-    hisotru
+    <x-url-chart :monthViews="$monthViews" />
 </div>

@@ -42,7 +42,7 @@
         </p>
         <p>
             <span class="font-semibold text-white">{{ __("This month's views: ") }} </span>
-            {{ $url->monthViews() }}
+            {{ $url->monthViews(now()->month) }}
         </p>
     </div>
 </div>

@@ -29,11 +29,12 @@ class Url extends Model
             ->count();
     }
 
-    public function monthViews()
+    public function monthViews(int $month, int $year = null)
     {
         return View::query()
             ->where('url_id', $this->id)
-            ->whereMonth('created_at', now()->month)
+            ->whereMonth('created_at', $month)
+            ->when($year, fn ($query, $year) => $query->whereYear('created_at', $year))
             ->count();
     }
 
