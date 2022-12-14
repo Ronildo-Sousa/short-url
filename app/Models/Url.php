@@ -14,6 +14,7 @@ class Url extends Model
     protected $fillable = [
         'code',
         'target_url',
+        'user_id'
     ];
 
     public function lastView()
