@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Url;
 use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Livewire\Component;
+use Symfony\Component\HttpFoundation\Response;
+use Termwind\Components\Ul;
 
 class History extends Component
 {
@@ -15,6 +17,12 @@ class History extends Component
 
     public function mount()
     {
+        $isOwner = auth()->user()->urls->contains(function ($value) {
+            return $value->user_id === $this->url->user_id;
+        });
+        if (!$isOwner) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
         $this->getYearlyViews();
 
         $this->configChart();
