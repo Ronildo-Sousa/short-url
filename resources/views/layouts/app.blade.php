@@ -15,6 +15,7 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -41,7 +42,7 @@
         </main>
     </div>
     @livewireScripts
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+    @livewireChartsScripts
 </body>
 
 </html>

@@ -13,7 +13,7 @@ Route::get('/{code}', AccessUrlController::class)->name('accessUrl');
 
 Route::prefix('user/')->group(function () {
     Route::get('/dashboard', Dashboard::class)->middleware(['auth', 'verified'])->name('dashboard');
-    Route::get('/history', History::class)->middleware(['auth', 'verified'])->name('history');
+    Route::get('/history/{url}', History::class)->middleware(['auth', 'verified'])->name('history');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

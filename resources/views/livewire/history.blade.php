@@ -1,13 +1,13 @@
 <div>
-    <div>
-        <select wire:model.defer='selectedYear'>
-            @foreach ($urlYears as $year)
-                <option value="{{$year}}">{{$year}}</option>
-            @endforeach
-        </select>
-        <button wire:click="getYearlyViews()">Search</button>
-       <p> {{ print_r($yearlyViews) }} </p>
-    </div>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+            {{ __('Yearly views') }}
+        </h2>
+    </x-slot>
 
-    <livewire:url-chart />
+    <div class="flex justify-center">
+        <div class="rounded" style="height: 22rem; width: 80%; background: rgb(82, 97, 122); margin-top: 5rem" >
+            <livewire:livewire-column-chart :column-chart-model="$columnChartModel" />
+        </div>
+    </div>
 </div>

@@ -2,36 +2,22 @@
 
 namespace App\Http\Livewire;
 
-use App\Charts\Sample;
 use App\Models\Url;
+use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Livewire\Component;
 
 class History extends Component
 {
     public Url $url;
     public $yearlyViews = [];
-    public int $selectedYear;
-    public array $urlYears = [];
+
+    private ColumnChartModel $columnChartModel;
 
     public function mount()
     {
-        $this->selectedYear = now()->year;
-        $this->url = auth()->user()->urls->last();
-
         $this->getYearlyViews();
 
-        $this->getUrlYears();
-    }
-
-    public function getUrlYears()
-    {
-        $this->url->views
-            ->countBy(function ($item) {
-                return $item->created_at->format('Y');
-            })
-            ->each(function ($item, $key) {
-                $this->urlYears[] = $key;
-            });
+        $this->configChart();
     }
 
     public function getYearlyViews()
@@ -39,32 +25,28 @@ class History extends Component
         $this->yearlyViews = [];
 
         for ($i = 1; $i < 13; $i++) {
-            $this->yearlyViews[] = $this->url->monthViews($i, $this->selectedYear);
+            $this->yearlyViews[] = $this->url->monthViews($i);
         }
-        $this->emit('changeGraph', $this->yearlyViews);
+    }
+
+    public function configChart()
+    {
+        $this->columnChartModel = (new ColumnChartModel())
+            ->setTitle(__("Yearly views"));
+
+        $mouths = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
+        for ($i = 0; $i < 12; $i++) {
+            $this->columnChartModel
+                ->addColumn($mouths[$i], $this->yearlyViews[$i], "#db771f");
+            // ->addColumn($mouths[$i], $this->yearlyViews[$i], sprintf('#%06X', mt_rand(0, 0xFFFFFF)));
+        }
     }
 
     public function render()
     {
-        return view('livewire.history');
+        return view('livewire.history', [
+            'columnChartModel' => $this->columnChartModel
+        ]);
     }
 }
-
-// $this->chart->labels([
-//     __('Jan'),
-//     __('Fev'),
-//     __('Mar'),
-//     __('Abr'),
-//     __('Mai'),
-//     __('Jun'),
-//     __('Jul'),
-//     __('Ago'),
-//     __('Set'),
-//     __('Out'),
-//     __('Nov'),
-//     __('Dez'),
-// ]);
-// $this->chart->dataset("Yearly's views", 'line', $this->yearlyViews);
-
-// {!! $chart->container() !!}
-// {!! $chart->script() !!}
