@@ -40,14 +40,14 @@ class History extends Component
     public function configChart()
     {
         $this->columnChartModel = (new ColumnChartModel())
+            ->withoutLegend()
             ->setTitle(__("Yearly views"));
 
         $mouths = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
 
         for ($i = 0; $i < 12; $i++) {
             $this->columnChartModel
-                ->addColumn($mouths[$i], $this->yearlyViews[$i], "#db771f");
-            // ->addColumn($mouths[$i], $this->yearlyViews[$i], sprintf('#%06X', mt_rand(0, 0xFFFFFF)));
+                ->addColumn($mouths[$i], $this->yearlyViews[$i], "#fc7703");
         }
     }
 
