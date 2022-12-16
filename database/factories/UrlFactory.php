@@ -20,6 +20,7 @@ class UrlFactory extends Factory
         return [
             'code' => Str::random(6),
             'target_url' => fake()->url(),
+            'user_id' => null
         ];
     }
 }
