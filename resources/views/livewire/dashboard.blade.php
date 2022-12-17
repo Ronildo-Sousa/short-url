@@ -24,6 +24,7 @@
                     </div>
 
                     <x-url-list :urls="$urls" />
+                    {{ $urls->links() }}
                 @else
                     <p>You don't have any url</p>
                 @endif
