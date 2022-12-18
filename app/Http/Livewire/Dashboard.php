@@ -22,7 +22,7 @@ class Dashboard extends Component
             'urls' => Url::query()
                 ->where('user_id', auth()->user()->id)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(2)
+                ->paginate(4)
         ]);
     }
 }
