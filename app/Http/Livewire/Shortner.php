@@ -24,6 +24,13 @@ class Shortner extends Component
         $this->validate();
 
         $this->shortUrl = ShortUrl::run($this->url, $this->customCode);
+        $this->url = "";
+    }
+
+    public function mount()
+    {
+        $this->shortUrl = "";
+        $this->url = "";
     }
 
     public function render(): View

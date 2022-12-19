@@ -5,22 +5,29 @@
                 <x-application-logo class="w-20 h-20 text-gray-500 fill-current hover:text-gray-600" />
             </a>
         </x-slot>
-
-        <div class="mt-4">
-            <x-inputs.input-label for="url" :value="__('URL')" />
-            <x-inputs.text-input wire:model='url' id="url" name="url" type="url" class="block w-full mt-1"
-                :placeholder="__('your URL here...')" autofocus />
-            <x-inputs.input-error :messages="$errors->get('url')" class="mt-2" />
-        </div>
-
-        <div class="mt-4">
-            <x-inputs.input-label for="customCode" class="mb-2" :value="__('Custom Code (optional)')" />
-            <div class="flex items-center">
-                <p class="text-lg font-medium text-white">{{ config('app.url') . '/' }}</p>
-                <x-inputs.text-input wire:model='customCode' id="customCode" name="customCode" type="text"
-                    class="w-full" :placeholder="__('your-code')" autofocus />
+        <div x-data="{ withCustomCode: false }">
+            <div class="mt-4">
+                <div class="flex justify-between">
+                    <x-inputs.input-label for="url" :value="__('URL')" />
+                    <div class="mb-2 text-white">
+                        <input x-on:click="withCustomCode = !withCustomCode" type="checkbox" class="active:outline-none"
+                            id="withCustomCode">
+                        <label for="withCustomCode">{{ __('with custom code') }}</label>
+                    </div>
+                </div>
+                <x-inputs.text-input wire:model='url' id="url" name="url" type="url"
+                    class="block w-full mt-1" :placeholder="__('your URL here...')" autofocus />
+                <x-inputs.input-error :messages="$errors->get('url')" class="mt-2" />
             </div>
-            <x-inputs.input-error :messages="$errors->get('customCode')" class="mt-2" />
+
+            <div x-show="withCustomCode" class="mt-4">
+                <div class="flex items-center">
+                    <p class="text-lg font-medium text-white"> {{ config('app.url') . '/' }} </p>
+                    <x-inputs.text-input wire:model='customCode' id="customCode" name="customCode" type="text"
+                        class="w-full" :placeholder="__('your-code')" autofocus />
+                </div>
+                <x-inputs.input-error :messages="$errors->get('customCode')" class="mt-2" />
+            </div>
         </div>
 
         <div class="mt-4 text-center">
