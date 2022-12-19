@@ -5,14 +5,13 @@ namespace App\Http\Livewire;
 use App\Actions\Url\ShortUrl;
 use Illuminate\View\View;
 use Livewire\Component;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Shortner extends Component
 {
     public string $url = "";
     public string $shortUrl = "";
     public ?string $customCode = "";
-    public ?string $qrCode = "";
+
 
     protected $rules = [
         'url' => ['required', 'url'],
@@ -31,7 +30,7 @@ class Shortner extends Component
 
     public function mount()
     {
-        $this->qrCode = QrCode::generate("https://google.com.br");
+        // dd(phpinfo());
     }
 
     public function render(): View

@@ -51,7 +51,7 @@
             </div>
             <div class="flex justify-center">
                 <div class="flex justify-around w-1/2 p-2 bg-gray-100 rounded">
-                    <p>{!! $qrCode !!}</p>
+                    <p>{!! QrCode::format('svg')->generate('https://google.com') !!}</p>
                     <div class="flex items-end">
                         <x-icons.download  />
                     </div>
