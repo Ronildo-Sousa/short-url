@@ -4,7 +4,7 @@
             <div>
                 <span class="font-semibold text-white">Short URL: </span>
                 <a href="{{ config('app.url') . '/' . $url->code }}" target="_blank" class="hover:text-blue-500">
-                    {{ config('app.url') . '/' . $url->code }}
+                    {{ $shortUrl }}
                 </a>
             </div>
             <div>
@@ -26,6 +26,12 @@
             <x-buttons.secondary-button class="mb-2 md:mb-0 md:mr-2">
                 <a href="{{ route('history', $url->id) }}">
                     <x-icons.graph />
+                </a>
+            </x-buttons.secondary-button>
+
+            <x-buttons.secondary-button class="mb-2 md:mb-0 md:mr-2">
+                <a href="{{ $qrCode }}" download>
+                    <x-icons.qrcode />
                 </a>
             </x-buttons.secondary-button>
 
