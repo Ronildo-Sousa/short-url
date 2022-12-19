@@ -35,25 +35,25 @@
                 {{ __('Short') }}
             </x-buttons.primary-button>
         </div>
-        @if (!$shortUrl)
+        @if ($shortUrl)
             <div x-data="{ shortUrl: @entangle('shortUrl'), copied: false }"
-                class="flex items-center justify-between p-2 mt-5 mb-2 text-white bg-green-600 rounded">
+                class="flex items-center justify-center p-2 mt-5 mb-2 text-white bg-green-600 rounded">
                 <div>
-                    <p>
+                    <a href="{{ $shortUrl }}" class="hover:text-indigo-400" target="_black">
                         {{ $shortUrl }}
-                    </p>
+                    </a>
 
                 </div>
-                <p x-on:click="$clipboard(shortUrl)"
-                    class="flex items-center justify-center w-10 p-1 border-2 border-green-700 border-solid rounded">
-                    <x-icons.copy class="w-5 h-5 cursor-pointer hover:text-gray-600" />
-                </p>
             </div>
             <div class="flex justify-center">
                 <div class="flex justify-around w-1/2 p-2 bg-gray-100 rounded">
-                    <p>{!! QrCode::format('svg')->generate('https://google.com') !!}</p>
-                    <div class="flex items-end">
-                        <x-icons.download  />
+                    <p>
+                        <img src="{{ $qrCode }}">
+                    </p>
+                    <div class="flex items-end p-2">
+                        <a href="{{ $qrCode }}" download>
+                            <x-icons.download />
+                        </a>
                     </div>
                 </div>
             </div>

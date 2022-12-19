@@ -5,12 +5,14 @@ namespace App\Http\Livewire;
 use App\Actions\Url\ShortUrl;
 use Illuminate\View\View;
 use Livewire\Component;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Shortner extends Component
 {
     public string $url = "";
     public string $shortUrl = "";
     public ?string $customCode = "";
+    public ?string $qrCode = "";
 
 
     protected $rules = [
@@ -25,12 +27,12 @@ class Shortner extends Component
         $this->validate();
 
         $this->shortUrl = ShortUrl::run($this->url, $this->customCode);
-        $this->url = "";
-    }
 
-    public function mount()
-    {
-        // dd(phpinfo());
+        $this->qrCode = 'data:image/png;base64,' . base64_encode(
+            QrCode::format('png')->size(300)->margin(3)->generate($this->shortUrl),
+        );
+
+        $this->url = "";
     }
 
     public function render(): View
