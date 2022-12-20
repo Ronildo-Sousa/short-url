@@ -1,4 +1,5 @@
 # Short Url 
+<img src="public/readme.gif" alt="demo" style="width: 80%">
 
 ## Sobre 📚
 É um simples encurtador de urls desenvolvido utilizando-se testes automatizados, Livewire e Tailwind, nesta aplicação o usuário pode criar e gerenciar uma url curta, podendo observar o desempenho de visualizações diárias, semanais, etc...

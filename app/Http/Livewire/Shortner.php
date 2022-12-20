@@ -16,8 +16,8 @@ class Shortner extends Component
 
 
     protected $rules = [
-        'url' => ['required', 'url'],
-        'customCode' => ['alpha_dash', 'unique:urls,code'],
+        'url' => ['required', 'url', 'max:255'],
+        'customCode' => ['alpha_dash', 'unique:urls,code', 'max:50'],
     ];
 
     public function create(): void
