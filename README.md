@@ -34,3 +34,10 @@
     # acesse o projeto no navegador
     http://localhost
 ```
+
+## Tecnologias utilizadas 🛠️
+
+* TailwindCSS
+* AlpineJs
+* Laravel
+* Livewire
